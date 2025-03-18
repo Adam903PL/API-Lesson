@@ -8,9 +8,9 @@ import { ordersMiddleware } from "./auth/middlewares/ordersMiddleware";
 import { productsController } from "./product/controllers/products.controller";
 import { eventsController } from "./events/controllers/events.controller";
 
-if (process.env.NODE_ENV !== "serverless") {
-  require("dotenv").config(); 
-}
+// if (process.env.NODE_ENV !== "serverless") {
+//   require("dotenv").config(); 
+// }
 
 const app = express();
 
@@ -30,11 +30,8 @@ app.use("/products", productsController);
 app.use("/events", eventsController);
 
 
-if (process.env.NODE_ENV !== "serverless") {
-  const PORT = process.env.PORT || 3333;
-  app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-  });
-}
-
+const PORT =  3333;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
 export default app;
