@@ -2,7 +2,7 @@ import express from "express";
 import { v4 } from "uuid";
 import { StatusCodes } from "http-status-codes";
 import { NextFunction, type Request, type Response } from "express";
-import { number } from "zod";
+import { z } from "zod";
 
 import { Router } from "express";
 
@@ -77,6 +77,10 @@ ordersController.get("/:id", async (req: Request, res: Response) => {
 ordersController.post("/", async (req: Request, res: Response) => {
   try {
     const items: OrderItem[] = req.body.items;
+
+    items.forEach((ele)=>{
+
+    })
 
     let total = 0;
     items.forEach((ele) => {

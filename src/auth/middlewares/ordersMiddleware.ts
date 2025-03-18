@@ -1,7 +1,7 @@
 import { NextFunction, type Request, type Response,type ErrorRequestHandler } from "express";
 import { StatusCodes } from "http-status-codes";
 
-import type { Order, OrderItem } from "../controllers/orders.controller";
+import type { Order, OrderItem } from "../../orders/controllers/orders.controller";
 export const ordersMiddleware = (err:ErrorRequestHandler,req: Request, res: Response, next: NextFunction) => {
     try{
         const body: OrderItem[] = req.body.items;
