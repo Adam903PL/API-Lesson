@@ -1,6 +1,8 @@
-// api/index.ts
 import serverless from "serverless-http";
-import app from "../src/server"; // zakładamy, że Twój index.ts znajduje się w katalogu src
+import app from "../src/server";
+import { Request,Response } from "express";
 
-// Opakowujemy aplikację Express w funkcję serverless
-export const handler = serverless(app);
+export default (req:Request, res:Response) => {
+  const handler = serverless(app);
+  return handler(req, res);
+};

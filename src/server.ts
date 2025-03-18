@@ -1,4 +1,3 @@
-// src/server.ts
 import express from "express";
 import bodyParser from "body-parser";
 import { logMiddleware } from "./auth/middlewares/logMiddleware";
@@ -8,9 +7,11 @@ import { ordersController } from "./orders/controllers/orders.controller";
 import { ordersMiddleware } from "./auth/middlewares/ordersMiddleware";
 import { productsController } from "./product/controllers/products.controller";
 import { eventsController } from "./events/controllers/events.controller";
-import dotenv  from "dotenv"
-dotenv.config()
-const PORT = process.env.PORT;
+
+if (process.env.NODE_ENV !== "serverless") {
+  require("dotenv").config(); 
+}
+
 const app = express();
 
 export type toDosTYpe = {
@@ -20,16 +21,17 @@ export type toDosTYpe = {
 };
 
 app.use(bodyParser.json());
-app.use('/orders', ordersMiddleware);
+app.use("/orders", ordersMiddleware);
 
-app.use('/todos', todosController);
-app.use('/passes', passesController);
-app.use('/orders', ordersController);
-app.use('/products', productsController);
-app.use('/events', eventsController);
+app.use("/todos", todosController);
+app.use("/passes", passesController);
+app.use("/orders", ordersController);
+app.use("/products", productsController);
+app.use("/events", eventsController);
 
 
-if (process.env.NODE_ENV !== 'serverless') {
+if (process.env.NODE_ENV !== "serverless") {
+  const PORT = process.env.PORT || 3333;
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
   });
